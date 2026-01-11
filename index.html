@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Focus Loop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<div id="confirmBox" class="confirmBox hidden">
+  <div class="confirmCard">
+    <h3 id="confirmText">Are you sure?</h3>
+    <div class="confirmBtns">
+      <button id="confirmYes">Yes</button>
+      <button id="confirmNo">Cancel</button>
+    </div>
+  </div>
+</div>
+<script type="module" src="auth.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="planner.js"></script>
+
+
+<body>
+  <div id="loginPage" class="loginPage">
+  <div class="loginCard">
+    <h2>Sign in to Focus Loop</h2>
+    <button onclick="googleLogin()">Continue with Google</button>
+  </div>
+</div>
+
+
+<div class="container" id="appBox" style="display:none;">
+
+  <div class="sidebar">
+    <h2>📘 Focus Loop</h2>
+    <button onclick="showTab('home')">Home</button>
+    <button onclick="showTab('upload')">Create Post</button>
+    <button onclick="showTab('notes')">Notes</button>
+    <button onclick="showTab('profile')">Profile</button>
+    <button onclick="toggleTheme()">🌙 Toggle Theme</button>
+    <button onclick="showTab('planner')">Planner</button>
+
+    <button onclick="openAnalytics()">Analytics</button>
+
+
+
+
+
+  </div>
+
+  <div class="content">
+    <div id="planner" class="tab hidden">
+  <h3>📅 Study Planner</h3>
+  <input type="date" id="planDate">
+  <textarea id="planText" placeholder="What will you study?"></textarea>
+  <button onclick="savePlan()">Save Plan</button>
+  <div id="planList"></div>
+</div>
+
+     
+    <div id="analytics" class="tab hidden">
+  <h3>📊 Your Study Stats</h3>
+  <div id="statsPosts" class="card"></div>
+  <div id="statsNotes" class="card"></div>
+  <div id="statsBookmarks" class="card"></div>
+</div>
+
+
+    <div id="home" class="tab">
+    
+      <h4 id="streakBox">🔥 Study Streak: 0 days</h4>
+      <div class="card">
+        <h3>🎯 Today’s Goal</h3>
+        <input id="goalText" placeholder="What is your goal today?">
+        <input type="number" id="goalTarget" placeholder="Target hours">
+        <button onclick="saveGoal()">Save Goal</button>
+
+  <div id="goalView"></div>
+  <progress id="goalProgress" value="0" max="100"></progress>
+</div>
+
+
+      <input id="searchBox" placeholder="Search...">
+<select id="filterBox" onchange="renderPosts()">
+  <option value="">All Subjects</option>
+  <option>Maths</option>
+  <option>Physics</option>
+  <option>Chemistry</option>
+  <option>Biology</option>
+</select>
+
+      <div id="postsBox"></div>
+    </div>
+
+    <div id="upload" class="tab hidden">
+      <select id="subjectBox">
+        <option>Maths</option>
+        <option>Physics</option>
+        <option>Chemistry</option>
+        <option>Biology</option>
+      </select>
+      <textarea id="postBox" placeholder="Type your doubt or post..."></textarea>
+      <input type="file" id="imageBox" accept="image/*">
+
+      <button onclick="addPost()">Post</button>
+      
+    </div>
+
+    <div id="notes" class="tab hidden">
+      <button onclick="startRecording()">🎤 Start Recording</button>
+      <button onclick="stopRecording()">⏹ Stop Recording</button>
+      <div id="recStatus" style="margin-top:8px;color:red;"></div>
+
+      <div id="audioList"></div>
+
+
+      <button onclick="exportPDF()">Export Notes as PDF</button>
+
+      <input id="noteTitle", placeholder="Notes Title">
+      <textarea id="noteContent", placeholder="Content"></textarea>
+      <button onclick="addNote()">Save</button>
+      <div id="notesBox"></div>
+    
+   
+</div>
+
+ <div id="profile" class="tab hidden">
+  <div class="instaProfile">
+
+    <div class="instaTop">
+      <img id="profilePic" src="https://via.placeholder.com/100">
+      <div>
+        <h2 id="showName">Your Name</h2>
+        <p id="showBio">Your bio appears here</p>
+      </div>
+    </div>
+
+    <div class="instaStats">
+      <div><b id="statPosts">0</b><br>Posts</div>
+      <div><b id="statNotes">0</b><br>Notes</div>
+      
+    </div>
+
+    <input type="file" id="picInput" accept="image/*" onchange="changePic()">
+    <input id="profileName" placeholder="Your Name">
+    <textarea id="profileBio" placeholder="Short Bio"></textarea>
+    <button onclick="saveProfile()">Save Profile</button>
+    <button onclick="logout()">Logout</button>
+     </div>
+    
+
+
+
+  </div>
+   
+</div>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div id="profileView"></div>
+
+</div>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+</html>
