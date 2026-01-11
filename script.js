@@ -12,25 +12,12 @@ function showTab(id){
   if(id === "analytics") renderAnalytics();
 
 }
-import { db } from "./auth.js";
-import { collection, addDoc, serverTimestamp } 
-from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
-async function addPost(){
-  const text = postBox.value.trim();
-  const subject = subjectBox.value;
+function addPost(){
 
-  if(text === "") return alert("Write something");
-
-  await addDoc(collection(db,"posts"),{
-    text:text,
-    subject:subject,
-    time:serverTimestamp()
-  });
-
-  postBox.value="";
-}
-
+  let text = document.getElementById("postBox").value;
+  let sub  = document.getElementById("subjectBox").value;
+  let img  = document.getElementById("imageBox").files[0];
 
   if(text === "") return alert("Type something!");
 
@@ -53,27 +40,13 @@ async function addPost(){
     renderPosts();
     refreshProfileStats();
   }
-
-import { onSnapshot, query, orderBy } 
-from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-
-function renderPosts(){
-  const q = query(collection(db,"posts"), orderBy("time","desc"));
-
-  onSnapshot(q, (snapshot)=>{
-    postsBox.innerHTML = "";
-    snapshot.forEach((doc)=>{
-      const p = doc.data();
-      postsBox.innerHTML += `
-        <div class="card">
-          <b>${p.subject}</b><br>${p.text}
-        </div>
-      `;
-    });
-  });
 }
 
-renderPosts();
+function renderPosts(){
+
+  let search = document.getElementById("searchBox").value.toLowerCase();
+  let filter = document.getElementById("filterBox").value;
+  let box = document.getElementById("postsBox");
 
   box.innerHTML = "";
 
@@ -106,6 +79,7 @@ renderPosts();
       </div>
     `;
   });
+}
 
 
 function likePost(i){
